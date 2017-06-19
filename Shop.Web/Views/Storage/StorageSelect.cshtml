@@ -1,0 +1,28 @@
+﻿@using Shop.Web.Models
+@using System.Web.Mvc;
+@model IEnumerable<Storage>
+
+@{
+    
+    List<SelectListItem> itemList = new List<SelectListItem>();
+    itemList.Add(new SelectListItem()
+    {
+        Value = "",
+        Text = "--Wybierz--"
+    });
+    foreach(var s in Model)
+        {
+            itemList.Add(new SelectListItem()
+            {
+                Value = s.Name,
+                Text = s.Name
+        });
+    }
+}
+
+@Html.DropDownList("selectedStorage", itemList, new {
+    @required = "required",
+    @class = "form-control",
+    @name = "storageDevice",
+    
+})

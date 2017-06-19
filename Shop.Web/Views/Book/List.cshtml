@@ -1,0 +1,51 @@
+﻿@using Shop.Web.Models
+@model IEnumerable<Book>
+
+@{
+    ViewBag.Title = "Książki";
+
+}
+
+<div class=" table-responsive">
+    <table class="table-bordered" style="width:100%">
+            <tr class="text-center">
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Data wydania</th>
+                <th>Kategoria</th>
+                <th>Wydawnictwo</th>
+                <th>Cena</th>
+            </tr>
+        @foreach (var b in Model)
+        {
+            <tr class="text-center">
+                <th>@b.Title</th>
+                <th>@b.Author</th>
+                <th>@b.ReleaseDate.ToShortDateString()</th>
+                <th>@b.Category</th>
+                <th>@b.Publisher</th>
+                <th>@b.Price zł <span class="label label-danger">@(b.SuperPrice == true ? "OKAZJA!" : "")</span> </th>
+                <th>@Html.RouteLink("Do koszyka", new
+               {
+                   controller = "Book",
+                   action = "Popup",
+                   category = @b.BookID
+               }, new
+               {
+                   @id = "showModal",
+                   @type = "button",
+                   @class = "btn btn-sm btn-primary",
+                   @data_toggle = "modal",
+                   @data_target = "#addToCartModal",
+                   @data_backdrop = "static"
+               })                    
+                </th>
+            </tr>
+        }
+    </table> 
+</div>
+
+
+
+
+

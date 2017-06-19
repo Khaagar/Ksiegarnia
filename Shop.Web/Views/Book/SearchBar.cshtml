@@ -1,0 +1,17 @@
+﻿@using Shop.Web.Models;
+
+@{
+    List<SelectListItem> itemList = new List<SelectListItem>();
+    itemList.Add(new SelectListItem() { Value = "Tytuł", Text = "Tytuł" });
+    itemList.Add(new SelectListItem() { Value = "Autor", Text = "Autor" });
+}
+    <h5 class="text-center" style="color:whitesmoke">
+        Wyszukaj </h5> 
+@using (Html.BeginForm("SearchList","Book",FormMethod.Post,new { @class= "form-inline text-center" }))
+{
+            <div class="form-group">
+                <label>@Html.DropDownList("searchCategory", itemList, new { @class = "btn" })</label>
+                <label>@Html.TextBox("searchText", null, new { @class = "form-control", @placeholder = "Czego Szukasz?"})</label>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+}

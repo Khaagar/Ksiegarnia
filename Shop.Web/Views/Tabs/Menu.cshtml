@@ -1,0 +1,19 @@
+﻿
+@model IEnumerable<string>
+
+@foreach (var tab in Model)
+{
+    @Html.RouteLink(tab,
+    new
+    {
+        controller = "Book",
+        action = "List",
+        category = tab,
+        
+    }, new
+    {
+        @class = "btn btn-default btn-lg"
+        + (tab == ViewBag.SelectedCategory ? " btn-primary" : "")
+    })
+
+}

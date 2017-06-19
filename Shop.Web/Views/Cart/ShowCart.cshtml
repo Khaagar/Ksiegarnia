@@ -1,0 +1,44 @@
+﻿@using Shop.Web.Models;
+@model  Cart
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+@if (Model.SumCartItems() != 0)
+{
+<div class=" table-responsive">
+    <table class="table-bordered" style="width:100%">
+            <tr class="text-center">
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Cena</th>
+                <th>Nośnik</th>
+                <th>Ilość</th>
+                <th>Wartość całkowita</th>
+            </tr>
+        @foreach (var b in Model.lineCollection)
+        {
+
+            <tr class="text-center">
+                <th>@b.Book.Title</th>
+                <th>@b.Book.Author</th>
+                <th>@b.Book.Price zł</th>
+                <th>@b.DataStorageDevice</th>
+                <th>@b.Quantity</th>
+                <th>@b.SumCartValue() zł</th>
+                <th>@Html.RouteLink("Usuń", new { controller = "Cart", action = "DeleteItem", category = b.Book.BookID }, new { @class = "btn btn-danger" })</th>
+        </tr>
+        }
+
+    </table>
+       
+
+
+</div>
+}
+else
+{
+    <h3>Niestety Twój koszyk jest pusty :(</h3>
+    <h4>Wróć tutaj, jak już coś dodasz :)</h4>
+}
+@Html.RouteLink("Kontynuuj zakupy", new { controller = "Book", action = "List" }, new { @class = "btn btn-primary" })

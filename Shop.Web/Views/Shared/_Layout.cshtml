@@ -1,0 +1,67 @@
+﻿@using Shop.Web.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/loader.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <script>
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $(this).removeData('bs.modal');
+                $(this).find('form')[0].reset();
+        });
+
+        $(window).load(function () {
+            $(".loader").fadeOut("slow");
+        })
+
+    </script>
+        <div class="loader"></div>
+        <div class="navbar navbar-inverse" role="navigation">
+        <div class="col-md-4">
+            <a class="navbar-brand" href="#">Księgarnia internetowa</a>
+        </div>
+            <div class="col-md-4">
+                @Html.Action("SearchBar", "Book")
+            </div>
+        <div class="col-md-4">
+            @Html.Action("CartNavbar", "Cart"))
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-2">
+            <h3>Katalog książek</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-11 col-md-offset-1">
+            <div class="modal fade" id="addToCartModal" aria-hidden="true" style="display: none;">
+                @Html.Action("Popup", "Book", UrlParameter.Optional)
+            </div>
+            </div>
+    </div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-11 col-md-offset-1">
+                @Html.Action("Menu", "Tabs")
+            </div>
+        </div>
+
+        <div class="row panel">
+            <div class="col-md-offset-1 col-md-11 col-md-offset-1">
+                @RenderBody()
+            </div>
+        </div>
+
+        
+    
+    
+</body>
+</html>
