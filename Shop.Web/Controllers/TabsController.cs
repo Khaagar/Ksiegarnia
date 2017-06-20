@@ -11,7 +11,7 @@ namespace Shop.Web.Controllers
         public List<String> tabs = new List<String>();
         
         
-        public PartialViewResult Menu(string category = null)
+        public PartialViewResult Menu(string category = "Wszystkie")
         {
             ViewBag.SelectedCategory = category;
             tabs.Add("Wszystkie");

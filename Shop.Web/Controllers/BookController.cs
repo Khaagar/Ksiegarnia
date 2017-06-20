@@ -20,20 +20,20 @@ namespace Shop.Web.Controllers
         public ViewResult List(string category = null)
         {
             ViewBag.SelectedCategory = category;
-            var listRepo = repository;
+            var listRepo = repository.Books.OrderBy(x=>x.Title);
             switch (category)
             {           
                 case "Audiobooki":
-                    return View(listRepo.Books.Where(x => x.KindOfBook == "a"));                    
+                    return View(listRepo.Where(x => x.KindOfBook == "a"));                    
                 case "E-booki":               
-                    return View(listRepo.Books.Where(x => x.KindOfBook == "e"));
+                    return View(listRepo.Where(x => x.KindOfBook == "e"));
                 case "Nowości":
-                    return View(listRepo.Books.Where(x => ((DateTime.Now - x.ReleaseDate).Days <15) && ((DateTime.Now - x.ReleaseDate).Days >= 0)));                   
+                    return View(listRepo.Where(x => ((DateTime.Now - x.ReleaseDate).Days <15) && ((DateTime.Now - x.ReleaseDate).Days >= 0)));                   
                 case "Zapowiedzi":
-                    return View(listRepo.Books.Where(x => ((x.ReleaseDate - DateTime.Now).Days < 15) && ((x.ReleaseDate - DateTime.Now).Days >= 0)));
+                    return View(listRepo.Where(x => ((x.ReleaseDate - DateTime.Now).Days < 15) && ((x.ReleaseDate - DateTime.Now).Days >= 0)));
                 case "Super okazje":
-                    return View(listRepo.Books.Where(x => x.SuperPrice));                  
-                default: return View(listRepo.Books);
+                    return View(listRepo.Where(x => x.SuperPrice));                  
+                default: return View(listRepo);
                     
             }
         }
@@ -45,17 +45,18 @@ namespace Shop.Web.Controllers
             string searchCategory = Request["searchCategory"];
             string searchText = Request["searchText"];
 
-            var listRepo = repository;
+            var listRepo = repository.Books.OrderBy(x => x.Title);
+
 
             if (searchCategory == "Tytuł")
             {
-                return View("List", listRepo.Books.Where(x => x.Title.ToUpper().Contains(searchText.ToUpper())));
+                return View("List", listRepo.Where(x => x.Title.ToUpper().Contains(searchText.ToUpper())));
             }
             else if (searchCategory == "Autor")
             {
-                return View("List", listRepo.Books.Where(x => x.Author.ToUpper().Contains(searchText.ToUpper())));
+                return View("List", listRepo.Where(x => x.Author.ToUpper().Contains(searchText.ToUpper())));
             }
-            return View("List", listRepo.Books);
+            return View("List", listRepo);
 
         }
 
@@ -67,11 +68,6 @@ namespace Shop.Web.Controllers
         public PartialViewResult SearchBar()
         {
             
-            return PartialView();
-        }
-
-        public PartialViewResult EmptyList()
-        {
             return PartialView();
         }
     }
