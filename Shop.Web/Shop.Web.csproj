@@ -179,6 +179,7 @@
     <Content Include="Views\Cart\CartNavbar.cshtml" />
     <Content Include="Views\Cart\ShowCart.cshtml" />
     <Content Include="Views\Book\SearchBar.cshtml" />
+    <Content Include="Views\Book\EmptyList.cshtml" />
     <None Include="Views\Shared\_LayoutCart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

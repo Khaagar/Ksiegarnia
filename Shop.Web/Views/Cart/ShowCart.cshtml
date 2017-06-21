@@ -6,15 +6,15 @@
 }
 @if (Model.SumCartItems() != 0)
 {
-<div class=" table-responsive">
-    <table class="table-bordered" style="width:100%">
-            <tr class="text-center">
+<div class="table-responsive">
+    <table style="width:100%; text-indent:1%">
+            <tr class="text-center" style="height:36px; background-color:#222222; color:white">
                 <th>Tytuł</th>
                 <th>Autor</th>
                 <th>Cena</th>
                 <th>Nośnik</th>
                 <th>Ilość</th>
-                <th>Wartość całkowita</th>
+                <th colspan="2">Wartość całkowita</th>
             </tr>
         @foreach (var b in Model.lineCollection)
         {
@@ -25,11 +25,18 @@
                 <th>@b.Book.Price zł</th>
                 <th>@b.DataStorageDevice</th>
                 <th>@b.Quantity</th>
-                <th>@b.SumCartValue() zł</th>
-                <th>@Html.RouteLink("Usuń", new { controller = "Cart", action = "DeleteItem", category = b.Book.BookID }, new { @class = "btn btn-danger" })</th>
+                <th>@b.SumCartLineValue() zł</th>
+                <th>@Html.RouteLink("Usuń", new { controller = "Cart", action = "DeleteItem", category = b.Book.BookID }, new { @class = "btn btn-danger", @style="width:90%; text-indent:0px"})</th>
         </tr>
         }
-
+        <tr class="text-center" style="height:36px">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th style="border-top-color:black; border-top-style:solid; background-color:#222222; color:white">Podsuma: </th>
+            <th style="border-top-style:solid">@Model.SumCartItems()</th="label-success">
+            <th style="border-top-style:solid">@Model.SumCartValue()</th>
+        </tr>
     </table>
        
 

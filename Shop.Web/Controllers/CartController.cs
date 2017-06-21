@@ -9,12 +9,8 @@ namespace Shop.Web.Controllers
 {
     public class CartController : Controller
     {
-
-
-        // GET: Cart
         public PartialViewResult CartNavbar()
         {
-            
             return PartialView(GetCart().SumCartItems());
         }
 
@@ -37,15 +33,18 @@ namespace Shop.Web.Controllers
             GetCart().AddBook(b, q, s);
             return Redirect("/");
         }
+
         public ActionResult DeleteItem(int category = 1)
         {
             GetCart().RemoveBook(category);
             return RedirectToAction("ShowCart");
         }
+
         public ViewResult ShowCart()
         {
             return View(GetCart());
         }
+
         private Cart GetCart()
         {
             Cart cart = (Cart)Session["Cart"];
@@ -56,6 +55,5 @@ namespace Shop.Web.Controllers
             }
             return cart;
         }
-
     }
 }

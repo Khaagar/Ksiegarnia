@@ -12,6 +12,7 @@ namespace Shop.Web
     {
         protected void Application_Start()
         {
+            Application["SelectedCategory"] = "Wszystkie";
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 

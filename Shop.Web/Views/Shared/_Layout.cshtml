@@ -13,24 +13,34 @@
 </head>
 <body>
     <script>
-            $('body').on('hidden.bs.modal', '.modal', function () {
-                $(this).removeData('bs.modal');
-                $(this).find('form')[0].reset();
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+            $(this).find('form')[0].reset();
         });
 
         $(window).load(function () {
             $(".loader").fadeOut("slow");
-        })
+        });
 
+        $(window).load(function () {
+            $('#emptyModal').modal('show');
+        });
+
+        function checkSubmit(e) {
+            if (e && e.keyCode == 13) {
+                document.forms[0].submit();
+            }
+        }
     </script>
-        <div class="loader"></div>
-        <div class="navbar navbar-inverse" role="navigation">
+
+    <div class="loader"></div>
+    <div class="navbar navbar-inverse" role="navigation">
         <div class="col-md-4">
             <a class="navbar-brand" href="#">Księgarnia internetowa</a>
         </div>
-            <div class="col-md-4">
-                @Html.Action("SearchBar", "Book")
-            </div>
+        <div class="col-md-4">
+            @Html.Action("SearchBar", "Book")
+        </div>
         <div class="col-md-4">
             @Html.Action("CartNavbar", "Cart"))
         </div>
@@ -41,26 +51,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-1 col-md-11 col-md-offset-1">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
             <div class="modal fade" id="addToCartModal" aria-hidden="true" style="display: none;">
                 @Html.Action("Popup", "Book", UrlParameter.Optional)
             </div>
-            </div>
+        </div>
     </div>
-        <div class="row">
-            <div class="col-md-offset-1 col-md-11 col-md-offset-1">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1" style="display:table">
+            @try
+            {
+                @Html.Action("Menu", "Tabs", new { category = HttpContext.Current.Application["SelectedCategory"].ToString() })
+            }
+            catch (NullReferenceException)
+            {
                 @Html.Action("Menu", "Tabs")
-            </div>
-        </div>
+            }
 
-        <div class="row panel">
-            <div class="col-md-offset-1 col-md-11 col-md-offset-1">
-                @RenderBody()
-            </div>
         </div>
-
-        
-    
-    
+    </div>
+    <div class="row panel">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+            @RenderBody()
+        </div>
+    </div>
 </body>
 </html>

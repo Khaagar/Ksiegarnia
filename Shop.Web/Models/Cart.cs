@@ -9,8 +9,6 @@ namespace Shop.Web.Models
     {
            public List<CartLine> lineCollection = new List<CartLine>();
 
-        
-
         public void AddBook(Book book = null, int quantity = 1, string device = null)
         {
             try
@@ -39,13 +37,23 @@ namespace Shop.Web.Models
             return count;
         }
 
+        public decimal SumCartValue()
+        {
+            decimal value = 0;
+            foreach (CartLine i in lineCollection)
+            {
+                value += i.SumCartLineValue();
+            }
+            return value;
+        }
+
         public class CartLine 
         {
             public Book Book { get; set; }
             public int Quantity { get; set; }
             public string DataStorageDevice { get; set; }
 
-            public decimal SumCartValue()
+            public decimal SumCartLineValue()
             {
                 return Book.Price * Quantity;
             }

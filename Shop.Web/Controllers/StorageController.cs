@@ -16,8 +16,6 @@ namespace Shop.Web.Controllers
             this.repository = storageRepository;
         }
 
-
-        // GET: Storage
         public PartialViewResult StorageSelect()
         {
             return PartialView(repository.Storages);

@@ -1,51 +1,51 @@
 ﻿@using Shop.Web.Models;
 @model  Book
 
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="label label-info">Dodaj do koszyka</span>
-                </div>
-                <div class="modal-body">
-                    <h3>@Model.Title</h3>
-                    <h4 style="font-style:italic">@Model.Author</h4>
-                    <h5>@Model.Price  zł</h5>
-                    @using (Html.BeginForm("SubmitItem", "Cart",FormMethod.Post,new { @id = "addToCartForm"}))
-                    {
-                        <div class="form-group">
-                            @Html.Hidden("bookID", Model.BookID)
-                            @Html.Hidden("bookTitle", Model.Title)
-                            @Html.Hidden("bookAuthor", Model.Author)
-                            @Html.Hidden("bookReleaseDate", Model.ReleaseDate)
-                            @Html.Hidden("bookCategory", Model.Category)
-                            @Html.Hidden("bookPublisher", Model.Publisher)
-                            @Html.Hidden("bookPrice", Model.Price)
-                            @Html.Hidden("bookSuperPrice", Model.SuperPrice)
-                            @Html.Hidden("bookKindOfBook", Model.KindOfBook)
-                        </div>
-                        <div class="form-group">
-                            <label for="storageDevice">Nośnik: *</label>
-                            @Html.Action("StorageSelect", "Storage")
-                        </div>
-                        <div class="form-group">
-                            <label for="quantity">Ilość: *</label>
-                            @Html.TextBox("itemQuantity",1,new
-                            {
-                                @class="form-control",
-                                @id="itemQuantity",
-                                @type="number",
-                                @required = "required",
-                                @value="1",
-                                @min="1",
-                                @max="999"
-                            })
-                        </div>
-                        <label>* - pola wymagane</label>
-                        <div class="text-right">
-                        <button type="button" class="btn" data-dismiss="modal">Anuluj</button>
-                        <button id="buttonSubmit" type="submit" class="btn btn-success">OK</button>
-                        </div>
-                    }
-                </div>                    
-            </div>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header navbar-inverse">
+            <p style="color:white">Dodaj do koszyka</p>
         </div>
+        <div class="modal-body">
+            <h3>@Model.Title</h3>
+            <h4 style="font-style:italic">@Model.Author</h4>
+            <h5>@Model.Price  zł</h5>
+            @using (Html.BeginForm("SubmitItem", "Cart", FormMethod.Post, new { @id = "addToCartForm" }))
+            {
+                <div class="form-group">
+                    @Html.Hidden("bookID", Model.BookID)
+                    @Html.Hidden("bookTitle", Model.Title)
+                    @Html.Hidden("bookAuthor", Model.Author)
+                    @Html.Hidden("bookReleaseDate", Model.ReleaseDate)
+                    @Html.Hidden("bookCategory", Model.Category)
+                    @Html.Hidden("bookPublisher", Model.Publisher)
+                    @Html.Hidden("bookPrice", Model.Price)
+                    @Html.Hidden("bookSuperPrice", Model.SuperPrice)
+                    @Html.Hidden("bookKindOfBook", Model.KindOfBook)
+                </div>
+                <div class="form-group">
+                    <label for="storageDevice">Nośnik: *</label>
+                    @Html.Action("StorageSelect", "Storage")
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Ilość: *</label>
+                    @Html.TextBox("itemQuantity", 1, new
+                    {
+                        @class = "form-control",
+                        @id = "itemQuantity",
+                        @type = "number",
+                        @required = "required",
+                        @value = "1",
+                        @min = "1",
+                        @max = "999"
+                    })
+                </div>
+                <label>* - pola wymagane</label>
+                <div class="text-right">
+                    <button type="button" class="btn" data-dismiss="modal">Anuluj</button>
+                    <button id="buttonSubmit" type="submit" class="btn btn-success">OK</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

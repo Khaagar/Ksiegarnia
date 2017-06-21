@@ -9,10 +9,10 @@ namespace Shop.Web.Controllers
     public class TabsController : Controller
     {
         public List<String> tabs = new List<String>();
-        
-        
+
         public PartialViewResult Menu(string category = "Wszystkie")
         {
+            HttpContext.Application["SelectedCategory"] = category;
             ViewBag.SelectedCategory = category;
             tabs.Add("Wszystkie");
             tabs.Add("Audiobooki");

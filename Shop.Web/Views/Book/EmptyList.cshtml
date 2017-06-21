@@ -1,0 +1,24 @@
+﻿<div class="modal fade" id="emptyModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header navbar-inverse">
+                <p style="color:white">Błąd wyszukiwania</p>
+            </div>
+            <div class="modal-body">
+                <label>W bazie danych nie odnaleziono produktów spełniających podane kryteria szukania.</label>
+            </div>
+            <div class="modal-footer">
+                @Html.RouteLink("OK", new
+                {
+                    controller = "Book",
+                    action = "List",
+                    category =HttpContext.Current.Application["SelectedCategory"]
+                }, new
+                {
+                    @type = "button",
+                    @class = "btn btn-danger"
+                })
+            </div>
+        </div>
+    </div>
+</div>

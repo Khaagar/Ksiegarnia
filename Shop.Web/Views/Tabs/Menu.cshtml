@@ -1,19 +1,17 @@
 ﻿
 @model IEnumerable<string>
 
-@foreach (var tab in Model)
-{
-    @Html.RouteLink(tab,
-    new
+    @foreach (var tab in Model)
     {
-        controller = "Book",
-        action = "List",
-        category = tab,
-        
-    }, new
-    {
-        @class = "btn btn-default btn-lg"
-        + (tab == ViewBag.SelectedCategory ? " btn-primary" : "")
-    })
-
-}
+        @Html.RouteLink(tab, new
+            {
+                controller = "Book",
+                action = "List",
+                category = tab,
+            }, new
+            {
+                @class = "btn btn-default btn-lg",
+                @style = "display:table-cell;"
+                + (tab == ViewBag.SelectedCategory ? "background:#222222; color:white" : "")
+            })
+    }
